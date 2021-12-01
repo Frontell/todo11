@@ -3,3 +3,9 @@
     flex-direction: column;
     align-items: center;
 }
+/*.task_text{*/
+/*    display: block;*/
+/*}*/
+.task_text_hide{
+    display: none;
+}

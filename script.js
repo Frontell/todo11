@@ -78,8 +78,28 @@ const addTask = () => {
     task.style.justifyContent = 'space-between'
     task.style.minWidth = '200px'
 
+
     const taskText = document.createElement('p')
     taskText.className = 'task_text'
+    taskText.onclick = () => taskHide()
+
+    const editText = document.createElement('input')
+    editText.classList.add('task_text_hide')
+    editText.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault()
+            document.querySelector('#click').click()
+        }
+    })
+
+    function editHide() {
+
+    }
+
+    function taskHide() {
+        taskText.classList.add('task_text_hide')
+        editText.classList.remove('task_text_hide')
+    }
 
     const checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
@@ -94,57 +114,60 @@ const addTask = () => {
         event.target.style.background = 'white'
     })
     removeButton.onclick = () => removing()
+
     function removing() {
         const parent = document.querySelector('.task_container')
         parent.remove(parent.querySelector('p'))
     }
 
     taskText.innerText = addInputVal
+    editText.value = addInputVal
     addToDoCont.append(task)
     task.append(checkbox)
     task.append(taskText)
+    task.append(editText)
     task.append(removeButton)
     document.querySelector('.task_input').value = ''
 }
 
 
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16)
+const randomColor = Math.floor(Math.random() * 16777215).toString(16)
 
-    function onPageLoad() {
-        contDiv = document.querySelector("#main_con");
+function onPageLoad() {
+    contDiv = document.querySelector("#main_con");
 
-        const taskCont = document.createElement('div')
-        taskCont.className = 'to_do_container'
+    const taskCont = document.createElement('div')
+    taskCont.className = 'to_do_container'
 
-        const intCont = document.createElement('div')
-        intCont.className = 'interface_container'
+    const intCont = document.createElement('div')
+    intCont.className = 'interface_container'
 
-        const taskInput = document.createElement('input')
-        taskInput.id = 'input'
-        taskInput.type = 'text'
-        taskInput.className = 'task_input'
-        taskInput.autofocus = true
-        taskInput.addEventListener('keyup', function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault()
-                document.querySelector('#click').click()
-            }
-        })
-        taskInput.addEventListener('focus', (event) => {
-            event.target.style.background = '#' + randomColor
-        })
+    const taskInput = document.createElement('input')
+    taskInput.id = 'input'
+    taskInput.type = 'text'
+    taskInput.className = 'task_input'
+    taskInput.autofocus = true
+    taskInput.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault()
+            document.querySelector('#click').click()
+        }
+    })
+    taskInput.addEventListener('focus', (event) => {
+        event.target.style.background = '#' + randomColor
+    })
 
-        const taskButton = document.createElement('input')
-        taskButton.type = 'submit'
-        taskButton.id = 'click'
-        taskButton.value = 'add'
-        taskButton.onclick = addTask
-        contDiv.append(taskCont)
+    const taskButton = document.createElement('input')
+    taskButton.type = 'submit'
+    taskButton.id = 'click'
+    taskButton.value = 'add'
+    taskButton.onclick = addTask
+    contDiv.append(taskCont)
 
-        contDiv.append(intCont)
-        intCont.append(taskInput)
-        intCont.append(taskButton)
-    }
+    contDiv.append(intCont)
+    intCont.append(taskInput)
+    intCont.append(taskButton)
+}
 
 
 
